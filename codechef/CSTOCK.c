@@ -6,12 +6,10 @@ int main(void){
 	int t;
 	scanf("%d", &t);
 	while(t--){
-		llint s, a, b;
-		double c;
-		scanf("%lld %lld %lld %f", &s, &a, &b, &c);
+		double s, a, b, c;
+		scanf("%lf %lf %lf %lf", &s, &a, &b, &c);
 		c = s*(1 + c/100);
-		printf("c = %f\n", c);
-		if(c <= b && c >= a)	
+		if(a <= c && c <= b)
 			printf("Yes\n");
 		else
 			printf("No\n");
