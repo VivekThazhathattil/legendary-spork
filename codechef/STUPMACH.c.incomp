@@ -1,0 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef long long int llint;
+
+typedef struct Box{
+	int idx;
+	llint capacity;
+} box;
+
+int compFunc(const void* num1, const void* num2){
+	llint diff = *(box*)num1.capacity - *(box*)num2.capacity;
+	return (diff > 0 ? 1 : (diff == 0 ? 0 : -1));
+}
+
+int main(void){
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		int n;
+		scanf("%d", &n);
+		box arr = (box*) malloc(sizeof(box) * n);
+		for(int i = 0; i < n; ++i){
+			scanf("%lld", &arr[i].capacity);
+			arr[i].idx = i;
+		}
+		qsort(arr, n, sizeof(llint), compFun);
+		free(arr);
+	}
+	return 0;
+}
