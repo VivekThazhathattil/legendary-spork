@@ -27,6 +27,7 @@ int main(void){
 			printf("NO\n");
 		else
 			printf("YES\n");
+		free(arr);
 	}
 	return 0;
 }
