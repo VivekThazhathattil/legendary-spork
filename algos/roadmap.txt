@@ -16,7 +16,7 @@
     + Selection Sort
     + Bubble Sort
 		- Heap Sort
-    - Count Sort
+    + Count Sort
     - Radix Sort
     - Searching
     - Linear Search

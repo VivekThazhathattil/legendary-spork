@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+typedef struct{
+	int income, rate;
+} slab;
+
+int main(void){
+	int t;
+	scanf("%d", &t);
+	while(t--){
+		int myIncome;
+		slab s[6] = {
+			{250000, 5},
+		 	{500000, 10},
+		 	{750000, 15},
+		 	{1000000, 20},
+		 	{1250000, 25},
+			{1500000, 30}
+		};
+		scanf("%d", &myIncome);
+		int totalTax = 0;
+		for(int i = 0; i < 6; ++i)
+			if(myIncome > s[i].income){
+				if(i < 5)
+					if(s[i].income < myIncome <= s[i+1].income)
+						totalTax += s[i].rate*(s[i+1].income - s[i].income)/100;
+					else
+						totalTax += s[i].rate*(myIncome - s[i].income)/100;
+				else
+					totalTax += s[i].rate*(myIncome - s[i].income)/100;
+			}
+
+		printf("%d\n", myIncome - totalTax);
+	}
+	return 0;
+}
