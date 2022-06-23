@@ -9,15 +9,12 @@ int main(void){
 	int t;
 	scanf("%d", &t);
 	while(t--){
-		int n, temp, *arr;
-		arr = (int *)calloc(n, sizeof(int));
+		int n, altCount = 0;
 		scanf("%d", &n);
-		scanf("%d", &temp);
-		++arr[0];
-		for(int i = 1; i < n; ++i){
-			scanf("%d", &temp);
-			if(isAlternating(arr[i - 1], arr[i]))
-		}
+		int *arr = (int *)calloc(n, sizeof(int));
+		for(int i = 0; i < n; ++i)
+			scanf("%d", &arr[i]);
+		for(int i = 1; i < n; ++i)
 		free(arr);
 	}
 	return 0;
