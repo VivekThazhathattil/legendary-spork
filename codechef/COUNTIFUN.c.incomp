@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+typedef long long int ll;
+
+int main(void){
+    int M, q;
+    scanf("%d", &M);
+    scanf("%d", &q);
+    while(q--){
+        int n, N, k, K, m;
+        ll ans = 0;
+        scanf("%d %d", &N, &K);
+        for(int k = 0; k <= K; ++K){
+            m = M;
+            for(int n = 0; n < N; ++n){   
+                     
+            }
+        }
+    }
+    return 0;
+}

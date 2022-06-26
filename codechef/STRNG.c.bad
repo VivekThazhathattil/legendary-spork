@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int compFun(const void* num1, const void* num2){
+    return *(int *)num1 - *(int *)num2;
+}
+
+int gcd(int a, int b){
+    if(a == 0 || b == 0)
+        return 0;
+    if(a == b)
+        return a;
+    if(a > b)
+        return gcd(a - b, b);
+    return gcd(a, b - a);
+}
+
+int get_array_gcd(int *arr, int n){
+    int ans = arr[0];
+    for(int i = 1; i < n; ++i){
+        ans = gcd(ans, arr[i]);
+        if(ans == 1)
+            break;
+    }
+    return ans;
+}
+
+int problem_element_found(int *arr, int n){
+    int num_elms = 0;
+    for(int i = 0; i < n; ++i){
+        if(i + 2 < n){
+            if(gcd(arr[i], arr[i+1]) == 1 && gcd(arr[i], arr[i + 2]) == 1)
+                ++num_elms;
+        }
+        else if(i + 1 < n){
+            if(gcd(arr[i], arr[i - 1]) == 1 && gcd(arr[i], arr[i + 1]) == 1)
+                ++num_elms;
+        }
+        else{
+            if(gcd(arr[i], arr[i - 1]) == 1 && gcd(arr[i], arr[i - 2]) == 1)
+                ++num_elms;
+        }
+    }
+    return num_elms == 1;
+}
+
+int main(void){
+    int t;
+    scanf("%d", &t);
+    while(t--){
+        int n;
+        scanf("%d", &n);
+        int *arr = (int *) malloc(sizeof(int) * n);
+        for(int i = 0; i < n; ++i)
+            scanf("%d", &arr[i]);
+        qsort(arr, n, sizeof(int), compFun);
+        int array_gcd = get_array_gcd(arr, n);
+        if(n == 2){
+            if(arr[0] == 1 && arr[1] == 1)
+                printf("0\n");
+            else if(arr[0] == 1)
+                printf("1\n");
+            else if(arr[1] == 1)
+                printf("1\n");
+            else
+                printf("2\n");
+        }
+        else if(array_gcd > 1)
+            printf("%d\n", n);
+        else{
+            if(problem_element_found(arr, n))
+                printf("1\n");
+            else
+                printf("0\n");
+        }
+            
+        free(arr);
+    }
+    return 0;
+}
