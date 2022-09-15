@@ -1,0 +1,59 @@
+#include <stdio.h>
+
+#define LIM 20001
+
+typedef struct{
+    int lt4, eq4, gt4_lt7, eq7, gt7;
+} Stats;
+
+Stats get_stats(char *s){
+    Stats stats = {0, 0, 0, 0};
+    int i = 0;
+    while(s[i] != '\0'){
+        int num = s[i] - '0';
+        if(num < 4) ++stats.lt4;
+        else if(num == 4) ++stats.eq4;
+        else if(num > 4 && num < 7) ++stats.gt4_lt7;
+        else if(num == 7) ++stats.eq7;
+        else if(num > 7) ++stats.gt7;
+        ++i; 
+    }
+    retuern stats;
+}
+
+void update_stats(Stats *s1, Stats *s2, int* n_7s, int* n_4s){
+    if(s1->eq7 <= s2->gt4_lt7){
+        s2->gt4_lt7 -= s1->eq7;
+        s1->eq7 = 0;
+        *n_7s += s1->eq7;
+    }
+    else{
+        s1->eq7 -= s2->gt4_lt7;
+        s2->gt4_lt7 = 0;
+        *n_7s += s2->gt4_lt7;
+    }
+    return;
+}
+
+int main(void){
+    int t;
+    scanf("%d", &t);
+    while(t--){
+       char str1[LIM], str2[LIM];
+       scanf("%s", str1);
+       scanf("%s", str2);
+       Stats stats1 = get_stats(str1);
+       Stats stats2 = get_stats(str2);
+
+       int num_7s = 0, num_4s = 0;
+       /* compute solution */
+       update_stats(&stats1, &stats2, &num_7s, &num_4s);
+       update_stats(&stats2, &stats1, &num_7s, &num_4s);
+       /* print output */
+       for(int i = 0; i < num_7s; ++i) printf("7");
+       for(int i = 0; i < num_4s; ++i) printf("4");
+       if(num_7s != 0 || num_4s != 0)
+           printf("\n");
+    }
+    return 0;
+}
