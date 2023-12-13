@@ -6,14 +6,11 @@ int main(){
   while(t--){
     int n, m;
     scanf("%d %d", &n, &m);
-    if(n == 1){
-      printf("0\n");
-    }
-    else if(n == 2){
-      printf("%d\n", m);
+    if(n*m % 2){
+      printf("%d\n", (n*m + 1)/ 2);
     }
     else{
-      printf("%d\n", 2*m);
+      printf("%d\n", n*m/2);
     }
   }
   return 0;
